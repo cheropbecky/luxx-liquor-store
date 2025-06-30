@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: url('assets/image2.jpg'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      padding-top: 100px;
+    }
+   /* Fixed Header Style */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7); 
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999; 
+      backdrop-filter: blur(5px); 
+    }
+    /* Main Content Container */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 28px;
+      color:orange;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #222;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+   /* Cart Layout*/
+    #cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      background:rgba(0, 0, 0, 0.886);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .cart-item img {
+      width: 120px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .cart-item h2 {
+      margin: 0;
+      font-size: 20px;
+      color:orange;
+    }
+    span{
+      color: orange;
+    }
+
+    .cart-item p {
+      margin: 6px 0;
+      font-size: 16px;
+      color: #ddd;
+    }
+   /* Quantity Buttons */
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+    .quantity-controls button {
+      padding: 6px 10px;
+      background-color: #555;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 6px;
+      color: white;
+    }
+   /* Cart Summary Section */
+    #cart-summary {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+    }
+    span#cart-total{
+      color: white;
+    }
+
+    #cart-summary h3 {
+      margin-bottom: 10px;
+    }
+    #cart-summary button {
+      background-color:rgb(216, 154, 38) ;
+      font-weight: bold;
+      font-size: 16px;
+      color: white;
+    }
+    #cart-summary button:hover {
+      background-color: rgb(129, 84, 2);
+    }
+
+   /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .cart-item {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .cart-item img {
+        width: 100%;
+        max-width: 150px;
+      }
+      .cart-item h2{
+        font-size: 14px;
+      }
+
+      .quantity-controls {
+        justify-content: center;
+        width: 100%;
+      }
+
+      header {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
+        text-align: left;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+     @media (min-width: 768px){
+      .cart-item {
+        gap: 200px;
+      }
+     }
+
+  </style>
+</head>
+<body>
+  <!-- Fixed Navigation Header -->
+  <header>
+    <h1>Your Cart</h1>
+    <button onclick="window.location.href='shop.html'">← Back to Shop</button>
+  </header>
+<!-- Main Cart Content Area -->
+  <div class="container"> 
+    <section id="cart-items"></section>
+    <div id="cart-summary">
+      <h3>Total: Ksh. <span id="cart-total">0</span></h3>
+      <button onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+    </div>
+  </div>
+   <!-- Footer Mount Point -->
+  <div id="footer-container"></div>
+
+  <script>
+    const cartContainer = document.getElementById("cart-items");
+    const cartTotalEl = document.getElementById("cart-total");
+  // Render cart items from localStorage
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartContainer.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p style='color:white'>Your cart is empty.</p>";
+        cartTotalEl.textContent = "0";
+        return;
+      }
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <div>
+            <h2>${item.name}</h2>
+            <p>Price: Ksh. ${item.price}</p>
+            <div class="quantity-controls">
+              <button onclick="changeQty(${index}, -1)">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQty(${index}, 1)">+</button>
+            </div>
+            <p>Subtotal: Ksh. ${itemTotal}</p>
+            <button onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+        cartContainer.appendChild(div);
+      });
+
+      cartTotalEl.textContent = total;
+    }
+
+    // Change quantity (add or subtract)
+    function changeQty(index, change) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+    // Remove an item entirely
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+    // Initial call to render cart on page load
+    renderCart();
+  </script>
+  <!-- Inject Footer Dynamically -->
+  <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
+</script>
+
+</body>
+</html>

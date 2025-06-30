@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luxx Liquor Shop</title>
+  <link rel="stylesheet" href="shop.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+</head>
+<body>
+<!--navigation bar with Buttons-->
+  <header class="navbar">
+    <div class="logo">Luxx</div>
+    <div class="buttons">
+      <button class="view-cart" onclick="window.location.href= 'cart.html'">View Cart <span class="cart-count">0</span></button>
+      <button class="home" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+  </header>
+<!--Product Category Filter Buttons-->
+  <section class="filters">
+    <button class="filter-btn" data-category="all">All</button>
+    <button class="filter-btn" data-category="wines">Wines</button>
+    <button class="filter-btn" data-category="whiskey">Whiskey</button>
+    <button class="filter-btn" data-category="vodka">Vodka</button>
+    <button class="filter-btn" data-category="beer">Beer</button>
+    <button class="filter-btn" data-category="softdrinks">Soft Drinks</button>
+  </section>
+
+<!--Dynamic product Grid placeholder-->
+  <section class="shop-preview" id="product-container"></section>
+
+  <!--  Reusable Footer Mount Point -->
+  <div id="footer-container"></div>
+
+  <script src="shop.js"></script>
+
+  <!-- Dynamically injects the footer -->
+  <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
+</script>
+</body>
+</html>
