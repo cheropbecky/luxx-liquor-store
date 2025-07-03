@@ -1,4 +1,4 @@
-# luxx-liquor-store
+
 # 🥂 Luxx Liquor Store
 
 Welcome to **Luxx Liquor Store** — an elegant, dark-themed online liquor shop designed for a seamless shopping experience across all devices. Built for beauty, performance, and practice.
