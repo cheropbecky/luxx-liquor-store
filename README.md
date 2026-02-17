@@ -1,4 +1,4 @@
-# 🍾 Luxx Liquor Store – Beginner's Toolkit with Node.js & Express
+# Luxx Liquor Store – Beginner's Toolkit with Node.js & Express
 
 > **Moringa School AI Capstone Project**
 > "Prompt-Powered Kickstart: Building a Beginner's Toolkit for Node.js & Express"
