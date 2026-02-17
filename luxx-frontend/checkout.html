@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('assets/image2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      padding-top: 150px;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      backdrop-filter: blur(5px);
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.886);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+      color: orange;
+    }
+    h2 { text-align: center; margin-bottom: 20px; }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    #order-summary {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+    }
+    h3 { color: orange; text-align: center; }
+    .order-item { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .order-total { text-align: right; font-weight: bold; font-size: 18px; margin-top: 15px; color: orange; }
+    button {
+      margin-top: 25px;
+      padding: 12px;
+      background-color: #222;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background-color: #444; }
+    #payment-modal,
+    #payment-form-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    #payment-form-modal { z-index: 10000; }
+    .payment-modal-content,
+    .payment-form-content {
+      background: black;
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+    }
+    .payment-btn {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+    .btn-mpesa { background-color: #53D769; }
+    .btn-paypal { background-color: #003087; }
+    .btn-visa  { background-color: #1A1F71; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Checkout</h2>
+    <button type="button" onclick="window.location.href='shop.html'">← Back to Shop</button>
+  </header>
+
+  <div class="container">
+    <h2>Billing Details</h2>
+    <form id="checkout-form" onsubmit="return false">
+      <input type="text" id="name" placeholder="Full Name" />
+      <input type="email" id="email" placeholder="Email Address" />
+      <input type="tel" id="phone" placeholder="Phone Number" />
+
+      <div id="order-summary">
+        <h3>Order Summary</h3>
+        <div id="items-list"></div>
+        <div class="order-total">Total: Ksh. <span id="checkout-total">0</span></div>
+      </div>
+
+      <button type="button" id="place-order-btn">Place Order</button>
+      <button type="button" id="pay-now-btn" style="display:none;">Pay Now</button>
+    </form>
+  </div>
+
+  <!-- Payment Method Modal -->
+  <div id="payment-modal">
+    <div class="payment-modal-content">
+      <h3>Choose Payment Method</h3>
+      <button type="button" onclick="showForm('mpesa')" class="payment-btn btn-mpesa">M-Pesa</button>
+      <button type="button" onclick="showForm('paypal')" class="payment-btn btn-paypal">PayPal</button>
+      <button type="button" onclick="showForm('visa')" class="payment-btn btn-visa">Visa Card</button>
+      <button type="button" onclick="closeModal()" style="margin-top:15px; color:orange; background:transparent;">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Payment Form Modal -->
+  <div id="payment-form-modal">
+    <div class="payment-form-content">
+      <h3 id="form-title"></h3>
+      <div id="form-fields"></div>
+      <button type="button" onclick="simulatePayment()" style="margin-top:20px; width:100%;">Simulate Payment</button>
+      <button type="button" onclick="closeFormModal()" style="margin-top:10px; color:orange; background:transparent;">Cancel</button>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+
+  <script>
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      });
+  </script>
+
+  <script src="checkout.js"></script>
+
+</body>
+</html>
