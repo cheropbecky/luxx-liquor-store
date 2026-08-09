@@ -1,0 +1,95 @@
+/* === Luxx Footer Container === */
+.luxx-footer {
+  background-image: url(/assets/image2.jpg);
+  color: orange;
+  font-family: 'Poppins', sans-serif;
+  padding: 4rem 2rem 2rem;
+  margin-top: 5rem;
+  border-top: 2px solid #b8860b;
+}
+
+/* == Grid Layout for Footer Columns == */
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand h2 {
+  font-size: 1.8rem;
+  color: #d4af37;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ===== Section Headers ===== */
+.footer-links h3,
+.footer-about h3,
+.footer-contact h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+/* ===== Links Lists ===== */
+.footer-links ul,
+.footer-about ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-about li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a,
+.footer-about a {
+  color: orange;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-about a:hover {
+  color: orangered;
+}
+.footer-contact p {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Social Icons ===== */
+.footer-socials {
+  margin-top: 1rem;
+}
+
+.footer-socials a {
+  color: orange;
+  margin-right: 2rem;
+  font-size: 1.3rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-socials a:hover {
+  color: orangered;
+  transform: scale(1.2);
+}
+
+/* === Footer Bottom Note === */
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  color: white;
+  border-top: 1px solid #333;
+  padding-top: 1.5rem;
+}

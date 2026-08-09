@@ -1,0 +1,101 @@
+.checkout-page {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('/assets/image2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding-top: 150px;
+  min-height: 100vh;
+}
+.checkout-page header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+.checkout-page .container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.886);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+  color: orange;
+}
+.checkout-page h2 { text-align: center; margin-bottom: 20px; }
+.checkout-page form { display: flex; flex-direction: column; gap: 15px; }
+.checkout-page input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+#order-summary {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+}
+.checkout-page h3 { color: orange; text-align: center; }
+.order-item { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.order-total { text-align: right; font-weight: bold; font-size: 18px; margin-top: 15px; color: orange; }
+.checkout-page button {
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #222;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.checkout-page button:hover { background-color: #444; }
+#payment-modal,
+#payment-form-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+#payment-modal.show,
+#payment-form-modal.show {
+  display: flex;
+}
+#payment-form-modal { z-index: 10000; }
+.payment-modal-content,
+.payment-form-content {
+  background: black;
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(233, 156, 33, 0.97);
+}
+.payment-btn {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+.btn-mpesa { background-color: #53D769; }
+.btn-paypal { background-color: #003087; }
+.btn-visa  { background-color: #1A1F71; }
